@@ -68,10 +68,8 @@
 }
 
 - (void)dealloc {
-    
-    if ([self.observer respondsToSelector:@selector(hi_private_page_delegate)]) {
-        self.observer.hi_private_page_delegate = nil;
-    }
+
+    self.observer.hi_private_page_delegate = nil;
 }
 
 @end
@@ -117,43 +115,43 @@
 #pragma mark - public
 - (HiRouterBuilder *) build:(NSString *)path {
     
-    return [self build:path action:HiRouterNavigationActionNone];
+    return [self build:path action:HiRouterTransitioningActionNone];
 }
 
-- (HiRouterBuilder *) build:(NSString *)path action:(HiRouterNavigationAction)action {
+- (HiRouterBuilder *) build:(NSString *)path action:(HiRouterTransitioningAction)action {
     
     return [self build:path fromViewController:nil action:action];
 }
 
-- (HiRouterBuilder *) build:(NSString *)path fromViewController:(UIViewController<HiRouterPageProtocol> *)viewController action:(HiRouterNavigationAction)action {
+- (HiRouterBuilder *) build:(NSString *)path fromViewController:(UIViewController<HiRouterPageProtocol> *)viewController action:(HiRouterTransitioningAction)action {
     
     return [self build:path fromViewController:viewController withParameters:nil action:action];
 }
 
-- (HiRouterBuilder *) build:(NSString *)path fromViewController:(UIViewController<HiRouterPageProtocol> *)viewController withParameters:(id)parameters action:(HiRouterNavigationAction)action{
+- (HiRouterBuilder *) build:(NSString *)path fromViewController:(UIViewController<HiRouterPageProtocol> *)viewController withParameters:(id)parameters action:(HiRouterTransitioningAction)action{
     
     // check filter
-    id<HiPageFilterProtocol> objce = [self pageFilterWithPath:path];
+    id<HiPageFilterProtocol> pageFilter = [self pageFilterWithPath:path];
     
     NSString *realPath = path;
     id realParameters = parameters;
     
     HiRouterBuilder *builder = [[HiRouterBuilder alloc] init];
-    builder.navigationAction = action;
+    builder.transitioningAction = action;
     
-    if (objce) {
-        realPath = objce.forwardPath == nil ? path : objce.forwardPath;
-        realParameters = objce.parameters == nil ? parameters : objce.parameters;
-        builder.navigationAction = objce.navigationAction;
+    if (pageFilter) {
+        realPath = pageFilter.forwardPath == nil ? path : pageFilter.forwardPath;
+        realParameters = pageFilter.parameters == nil ? parameters : pageFilter.parameters;
+        builder.transitioningAction = pageFilter.transitioningAction;
     }
     
-    UIViewController<HiRouterPageProtocol> *pViewController = [self viewControllerWithPath:realPath parameters:realParameters];
+    UIViewController<HiRouterPageProtocol> *targetViewController = [self viewControllerWithPath:realPath parameters:realParameters];
     
     // set delegate,then can callback
-    pViewController.hi_private_page_delegate = viewController;
+    targetViewController.hi_private_page_delegate = viewController;
     
-    builder.toViewController = pViewController;
-    builder.fromViewController = viewController;
+    builder.targetViewController = targetViewController;
+    builder.sourceViewController = viewController;
     
     return builder;
 }

@@ -6,16 +6,15 @@
 //  Copyright © 2018年 Four. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "HiRouterDefine.h"
 
 @interface HiRouterBuilder : NSObject
 
-@property (weak, nonatomic) UIViewController *fromViewController;
-@property (strong, nonatomic) UIViewController *toViewController;
+@property (weak, nonatomic) UIViewController *sourceViewController; // maybe nil
+@property (strong, nonatomic) UIViewController *targetViewController;
 
-@property (nonatomic,assign) HiRouterNavigationAction navigationAction;
+@property (nonatomic,assign) HiRouterTransitioningAction transitioningAction;
 
 // fromviewcontroller present or push toviewcontroller
 // completion just for present

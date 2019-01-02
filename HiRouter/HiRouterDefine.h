@@ -10,9 +10,9 @@
 #define HiRouterDefine_h
 
 typedef enum : NSUInteger {
-    HiRouterNavigationActionNone,
-    HiRouterNavigationActionPush,
-    HiRouterNavigationActionPresent,
-} HiRouterNavigationAction;
+    HiRouterTransitioningActionNone,
+    HiRouterTransitioningActionPush,
+    HiRouterTransitioningActionPresent,
+} HiRouterTransitioningAction;
 
 #endif /* HiRouterDefine_h */

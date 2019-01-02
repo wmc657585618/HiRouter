@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface UIViewController (HiRouterNavigationAction)<HiRouterPageProtocol>
+@interface UIViewController (HiRouterTransitioningAction)<HiRouterPageProtocol>
 
 - (void)hi_pushPath:(NSString *)path animated:(BOOL)animated;
 - (void)hi_pushPath:(NSString *)path withParameters:(id)parameters animated:(BOOL)animated;

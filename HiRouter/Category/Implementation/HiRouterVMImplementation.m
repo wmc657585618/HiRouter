@@ -62,6 +62,7 @@
 }
 
 - (void)dealloc {
+
     self.observer.hi_private_delegate = nil;
 }
 

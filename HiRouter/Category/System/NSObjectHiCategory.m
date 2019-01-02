@@ -33,26 +33,26 @@
 
 @end
 
-@implementation UIViewController (HiRouterNavigationAction)
+@implementation UIViewController (HiRouterTransitioningAction)
 
 - (void)hi_pushPath:(NSString *)path animated:(BOOL)animated {
     
-    [[HiRouter.instance build:path fromViewController:self action:HiRouterNavigationActionPush] buildAnimated:animated completion:nil];
+    [[HiRouter.instance build:path fromViewController:self action:HiRouterTransitioningActionPush] buildAnimated:animated completion:nil];
 }
 
 - (void)hi_pushPath:(NSString *)path withParameters:(id)parameters animated:(BOOL)animated {
     
-    [[HiRouter.instance build:path fromViewController:self withParameters:parameters action:HiRouterNavigationActionPush] buildAnimated:animated completion:nil];
+    [[HiRouter.instance build:path fromViewController:self withParameters:parameters action:HiRouterTransitioningActionPush] buildAnimated:animated completion:nil];
 }
 
 - (void)hi_presentPath:(NSString *)path withParameters:(id)parametes animated:(BOOL)animated completion:(void(^)(void))completion{
     
-    [[HiRouter.instance build:path fromViewController:self withParameters:parametes action:HiRouterNavigationActionPresent] buildAnimated:animated completion:completion];
+    [[HiRouter.instance build:path fromViewController:self withParameters:parametes action:HiRouterTransitioningActionPresent] buildAnimated:animated completion:completion];
 }
 
 - (void)hi_presentPath:(NSString *)path animated:(BOOL)animated completion:(void(^)(void))completion{
     
-    [[HiRouter.instance build:path fromViewController:self action:HiRouterNavigationActionPresent] buildAnimated:animated completion:completion];
+    [[HiRouter.instance build:path fromViewController:self action:HiRouterTransitioningActionPresent] buildAnimated:animated completion:completion];
 }
 
 - (void)hi_callBackParameters:(id)callBackParameters {

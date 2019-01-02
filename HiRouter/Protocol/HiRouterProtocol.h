@@ -42,7 +42,7 @@
 
 @protocol HiPageFilterProtocol <HiFilterProtocol>
 
-@property (nonatomic,readonly) HiRouterNavigationAction navigationAction;
+@property (nonatomic,readonly) HiRouterTransitioningAction transitioningAction;
 
 @end
 
