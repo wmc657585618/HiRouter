@@ -10,7 +10,7 @@
 #import <objc/runtime.h>
 
 // release observer
-@interface NSObjectReleaseObserver : NSObject
+@interface HiObjectReleaseObserver : NSObject
 
 @property (nonatomic,weak) NSObject *observer;
 - (instancetype)initWithObsever:(NSObject *)observer;
@@ -20,24 +20,24 @@
 @interface NSObject (hi_delegate)<HiRouterViewModel>
 
 @property (nonatomic,weak) NSObject<HiRouterViewModel> * hi_private_delegate;
-@property (nonatomic,strong) NSObjectReleaseObserver *releaseObserver;
+@property (nonatomic,strong) HiObjectReleaseObserver *releaseObserver;
 
 @end
 
 @implementation NSObject (hi_delegate)
 
-- (void)setReleaseObserver:(NSObjectReleaseObserver *)releaseObserver {
+- (void)setReleaseObserver:(HiObjectReleaseObserver *)releaseObserver {
     objc_setAssociatedObject(self, @selector(releaseObserver), releaseObserver, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (NSObjectReleaseObserver *)releaseObserver {
+- (HiObjectReleaseObserver *)releaseObserver {
     return objc_getAssociatedObject(self, @selector(releaseObserver));
 }
 
 - (void)setHi_private_delegate:(NSObject<HiRouterViewModel> *)hi_private_delegate {
     
     if (hi_private_delegate) {
-        hi_private_delegate.releaseObserver = [[NSObjectReleaseObserver alloc] initWithObsever:self];
+        hi_private_delegate.releaseObserver = [[HiObjectReleaseObserver alloc] initWithObsever:self];
     }
     
     objc_setAssociatedObject(self, @selector(hi_private_delegate), hi_private_delegate, OBJC_ASSOCIATION_ASSIGN);
@@ -50,7 +50,7 @@
 @end
 
 
-@implementation NSObjectReleaseObserver
+@implementation HiObjectReleaseObserver
 
 - (instancetype)initWithObsever:(NSObject *)observer
 {
