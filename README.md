@@ -1,4 +1,4 @@
-# HiRouter
+# iOS-Router
 
 ## 描述
 + router 是为了解耦合而写的,包括了界面解耦,view-model 解耦
@@ -13,7 +13,7 @@
 #### 使用
 ```
 /**
-创建 viewcontroller
+ 创建 viewcontroller
 */
 - (HiRouterBuilder *) build:(NSString *)path;
 
@@ -62,7 +62,28 @@ url 预处理
 - (id<HiNetworkFilterProtocol>)performURL:(NSString *)url parameters:(id)parameters;
 
 ```
+### 导航
+```
+**
+ pop 到最后一个通过 path 创建的 viewController
+ */
+- (NSError *)popToPath:(NSString *)path parameters:(id)parameters animated:(BOOL)animated;
 
+/**
+ 删除 viewController
+ */
+- (NSError *)removePath:(NSString *)path parameters:(id)parameters;
+
+/**
+  向路由中最后一个通过 path 创建的 viewController 发送数据
+ */
+- (NSError *)postParameters:(id)parameters toPath:(NSString *)path;
+
+/**
+ 获取最后一个通过 path 的 viewController
+ */
+- (UIViewController<HiRouterPageProtocol> *)topViewControllerForPath:(NSString *)path;
+```
 ### HiRouterPageProtocol
 ```
 /**
@@ -122,4 +143,3 @@ url 预处理
 */
 @property (nonatomic,readonly) NSString *result;
 ```
-

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = "HiRouter"
-    s.version      = "1.0.0"
+    s.version      = "1.1.0"
     s.summary      = "Router is written for decoupling."
     s.description  = "Router is written for decoupling, including interface decoupling, View-model decoupling"
     s.homepage     = "https://github.com/wmc657585618/HiRouter"
