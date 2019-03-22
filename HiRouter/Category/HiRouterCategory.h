@@ -43,3 +43,35 @@
 - (id<HiNetworkFilterProtocol>)performURL:(NSString *)url parameters:(id)parameters;
 
 @end
+
+/******************** ViewController ********************/
+@interface HiRouter (ViewController)
+
+/**
+ pop to last viewController for path
+ get parameters if viewController responds recivedParameters:
+ @return nil or code:0 is no error.
+ */
+- (NSError *)popToPath:(NSString *)path parameters:(id)parameters animated:(BOOL)animated;
+
+/**
+ remove viewController
+ get parameters if viewController responds recivedParameters:
+ @return nil or code:0 is no error.
+ */
+- (NSError *)removePath:(NSString *)path parameters:(id)parameters;
+
+/**
+ post parameters to path
+ get parameters if viewController responds recivedParameters:
+ @return nil or code:0 is no error.
+ */
+- (NSError *)postParameters:(id)parameters toPath:(NSString *)path;
+
+/**
+ top viewController
+
+ @return last created viewController for path
+ */
+- (UIViewController<HiRouterPageProtocol> *)topViewControllerForPath:(NSString *)path;
+@end

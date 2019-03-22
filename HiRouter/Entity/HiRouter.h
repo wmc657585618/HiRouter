@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly, nonatomic) NSDictionary<NSString *, id<HiPageFilterProtocol>> *pageFilters;
 @property (readonly, nonatomic) NSDictionary<NSString *, id<HiNetworkFilterProtocol>> *networkFilters;
 
+@property (readonly, nonatomic) NSMapTable<NSString *, UIViewController<HiRouterPageProtocol> *> *viewControllers;
+
 - (void) registRoute:(NSDictionary<NSString *, NSString *> *)routeDictionary;
 
 /**

@@ -17,10 +17,12 @@
 
 @property (strong, nonatomic) NSMutableDictionary<NSString *, id<HiPageFilterProtocol>> *pPageFilters;
 @property (strong, nonatomic) NSMutableDictionary<NSString *, id<HiNetworkFilterProtocol>> *pNetworFilters;
+@property (nonatomic,strong) NSMapTable<NSString *, UIViewController<HiRouterPageProtocol> *> *pViewControllers;
 
 @property (strong, nonatomic) NSLock *pageFilterLock;
 @property (strong, nonatomic) NSLock *networkFilterLock;
 @property (strong, nonatomic) NSLock *routerLock;
+
 @end
 
 static HiRouter *_instance = nil;
@@ -105,6 +107,11 @@ static HiRouter *_instance = nil;
     return _routerLock;
 }
 
+- (NSMapTable *)pViewControllers {
+    if (!_pViewControllers) _pViewControllers = [NSMapTable mapTableWithKeyOptions:NSHashTableStrongMemory valueOptions:NSHashTableWeakMemory];
+    return _pViewControllers;
+}
+
 /****************** lazy ******************/
 
 #pragma mark - public
@@ -155,4 +162,8 @@ static HiRouter *_instance = nil;
     return self.pNetworFilters;
 }
 
+- (NSMapTable<NSString *,UIViewController<HiRouterPageProtocol> *> *)viewControllers {
+    
+    return self.pViewControllers;
+}
 @end

@@ -104,7 +104,7 @@
     
     UIViewController<HiRouterPageProtocol> *pViewController = [self viewControllerWithPath:path];
     
-    if (pViewController && [pViewController respondsToSelector:@selector(recivedParameters:)]) {
+    if (pViewController && [pViewController respondsToSelector:@selector(recivedParameters:)] && parameters) {
         
         [pViewController recivedParameters:parameters];
     }
@@ -140,8 +140,8 @@
     builder.transitioningAction = action;
     
     if (pageFilter) {
-        realPath = pageFilter.forwardPath == nil ? path : pageFilter.forwardPath;
-        realParameters = pageFilter.parameters == nil ? parameters : pageFilter.parameters;
+        realPath = pageFilter.forwardPath ? : path;
+        realParameters = pageFilter.parameters ? : parameters;
         builder.transitioningAction = pageFilter.transitioningAction;
     }
     
@@ -152,6 +152,9 @@
     
     builder.targetViewController = targetViewController;
     builder.sourceViewController = viewController;
+    
+    // record
+    [self.viewControllers setObject:targetViewController forKey:path];
     
     return builder;
 }
